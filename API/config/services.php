@@ -32,7 +32,7 @@ return [
     ],
 
     'amadeus' => [
-        'client_id' => env('AMADEUS_CLIENT_ID'),
-        'client_secret' => env('AMADEUS_CLIENT_SECRET'),
+        'api_key' => env('AMADEUS_API_KEY'),
+        'api_secret' => env('AMADEUS_API_SECRET'),
     ],
 ];
