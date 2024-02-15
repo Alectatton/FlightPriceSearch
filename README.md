@@ -1,1 +1,3 @@
-Flight Price Tracker full-stack application built with Laravel and Vue.
+Flight Price Search full-stack web application.
+
+Built with Laravel, Vue, Typescript, Tailwind
