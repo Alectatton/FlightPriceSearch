@@ -1,6 +1,5 @@
 <template>
-    <div>
-        Footer
+    <div class="flex justify-center py-4 text-gray-600">
     </div>
 </template>
   

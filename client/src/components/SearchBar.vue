@@ -1,5 +1,7 @@
 <template>
-    <div class="flex justify-center items-center">
+    <hr />
+
+    <div class="flex justify-center items-center py-4">
         <div 
             v-for="input in inputs"
             :key="input.value"
@@ -19,6 +21,8 @@
             Search
         </button>
     </div>
+
+    <hr />
 </template>
   
 <script lang="ts">
@@ -32,12 +36,12 @@ export default {
             inputs: [
                 {
                     value: 'departure_location',
-                    placeholder: 'Leaving from',
+                    placeholder: 'Leaving From',
                     icon: 'location_on'
                 },
                 {
                     value: 'arrival_location',
-                    placeholder: 'Going to',
+                    placeholder: 'Going To',
                     icon: 'location_on'
                 },
                 {

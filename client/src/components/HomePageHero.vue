@@ -1,6 +1,9 @@
 <template>
-    <div>
-        Home Page Hero
+    <div class="flex align-center justify-center py-5 ">
+        <img 
+            src="../assets/landscape.jpg" 
+            class="flex w-3/4 justify-center align-middle rounded-xl shadow-xl"
+        />
     </div>
 </template>
   
