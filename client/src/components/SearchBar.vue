@@ -40,7 +40,7 @@
                         :min-date="new Date()"
                         no-today> 
                         <template #trigger>
-                            <input :placeholder="date_range ? date_range : 'Dates'"
+                            <input :placeholder="date_range ? date_range : 'dates'"
                                 class="items-center py-1 px-2 rounded-lg focus:outline-none w-50"
                             />
                         </template>
@@ -54,7 +54,7 @@
 
                 <input 
                     v-model="travelers"
-                    placeholder="Travelers"
+                    placeholder="Number of Travelers"
                     class="items-center py-1 px-2 rounded-lg focus:outline-none w-50"
                     type="text"
                 />
@@ -92,14 +92,24 @@ export default {
                 return;
             }
 
+            console.log('Values')
+            console.log(this.leaving_from);
+            console.log(this.going_to);
+            console.log(this.date_range[0]);
+            console.log(this.date_range[1]);
+            console.log(this.travelers);
+
             console.log('Form submitted');
         }
+    },
+    computed: {
+
     },
     data () {
         return {
             leaving_from: '',
             going_to: '',
-            date_range: '',
+            date_range: [],
             travelers: ''
         }
     },
