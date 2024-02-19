@@ -74,6 +74,8 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useVuelidate } from '@vuelidate/core';
 import { required, integer, minValue } from '@vuelidate/validators';
+import { mapActions } from 'pinia';
+import { useFlightStore } from '../stores/flight';
 
 export default {
     name: 'SearchBar',
@@ -84,6 +86,9 @@ export default {
         VueDatePicker,
     },
     methods: {
+        ...mapActions(useFlightStore, [
+            'fetchFlights',
+        ]),
         async onSubmit() {
             const isValid = await this.v$.$validate();
 
@@ -92,14 +97,12 @@ export default {
                 return;
             }
 
-            console.log('Values')
-            console.log(this.leaving_from);
-            console.log(this.going_to);
-            console.log(this.date_range[0]);
-            console.log(this.date_range[1]);
-            console.log(this.travelers);
-
-            console.log('Form submitted');
+            this.fetchFlights({
+                leaving_from: this.leaving_from,
+                going_to: this.going_to,
+                date_range: this.date_range,
+                travelers: this.travelers
+            });
         }
     },
     computed: {

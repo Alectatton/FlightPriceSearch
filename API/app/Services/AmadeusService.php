@@ -35,6 +35,8 @@ class AmadeusService
             'max'                     => 10,
         ];
 
+        dump($data);
+
         try {
             return Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->getAccessToken(),

@@ -18,6 +18,8 @@ class FlightController extends Controller
 
     public function index(Request $request)
     {
+        dump("HERE");
+
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $departureAirport = $request->input('departure_airport');
