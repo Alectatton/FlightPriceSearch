@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import api from "../services/apiService";
 // import process from "process";
 
 // const API_URL = process.env.API_URL;
@@ -14,7 +14,7 @@ export const useFlightStore = defineStore('flight', {
             console.log('[FlightStore] fetchFlights');
             console.log(payload);
 
-            axios.get(`${API_URL}/api/flights`, { params: payload })
+            api.getFlights({ params: payload })
                 .then((response: any) => {
                     console.log("Response", response.data);
                     this.flights = response.data;

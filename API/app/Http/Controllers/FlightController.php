@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Services\AmadeusService;
+use Carbon\Carbon;
  
 class FlightController extends Controller
 {
@@ -18,14 +19,17 @@ class FlightController extends Controller
 
     public function index(Request $request)
     {
-        dump("HERE");
+        $request = $request->get('params');
 
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $departureAirport = $request->input('departure_airport');
-        $arrivalAirport = $request->input('arrival_airport');
+        dump($request);
 
-        $response = $this->amadeusService->getFlights($startDate, $endDate, $departureAirport, $arrivalAirport);
+        $startDate = Carbon::parse($request['date_range'][0])->format('Y-m-d');
+        $endDate = Carbon::parse($request['date_range'][1])->format('Y-m-d');
+        $departureAirport = $request['leaving_from'];
+        $arrivalAirport = $request['going_to'];
+        $adults = $request['travelers'];
+
+        $response = $this->amadeusService->getFlights($startDate, $endDate, $departureAirport, $arrivalAirport, $adults);
 
         return response()->json($response);
     }

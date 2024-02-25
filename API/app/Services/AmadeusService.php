@@ -28,23 +28,27 @@ class AmadeusService
     {
         $data = [
             'departureDate'           => $startDate,
-            // 'end_date'                => $endDate,
+            'returnDate'              => $endDate,
             'originLocationCode'      => $departureAirport,
             'destinationLocationCode' => $arrivalAirport,
             'adults'                  => $adults,
-            'max'                     => 10,
+            'max'                     => 5,
         ];
 
         dump($data);
 
         try {
-            return Http::withHeaders([
+            $respone = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->getAccessToken(),
                 'Accept'        => 'application/json',
             ])->get($this->flightOffersEndpoint, $data)->json();
         } catch (Exception $e) {
             throw new \Exception('Failed to get flights' . $e->getMessage());
         }
+
+        dump($respone);
+
+        return "Flights found!";
     }
 
     private function getAccessToken(): string
