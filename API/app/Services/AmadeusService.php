@@ -38,7 +38,7 @@ class AmadeusService
         dump($data);
 
         try {
-            $respone = Http::withHeaders([
+            $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->getAccessToken(),
                 'Accept'        => 'application/json',
             ])->get($this->flightOffersEndpoint, $data)->json();
@@ -46,7 +46,7 @@ class AmadeusService
             throw new \Exception('Failed to get flights' . $e->getMessage());
         }
 
-        dump($respone);
+        dump($response);
 
         return "Flights found!";
     }

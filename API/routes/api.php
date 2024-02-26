@@ -22,6 +22,6 @@ Route::get('/', function (Request $request) {
     return 'Hello';
 });
 
-Route::group(['flights'], function () {
-    Route::get('/flights', 'App\Http\Controllers\FlightController@index');
+Route::group(['prefix' => 'flights'], function () {
+    Route::get('/', 'App\Http\Controllers\FlightController@index');
 });
