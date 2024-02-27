@@ -21,8 +21,6 @@ class FlightController extends Controller
     {
         $request = $request->get('params');
 
-        dump($request);
-
         $startDate = Carbon::parse($request['date_range'][0])->format('Y-m-d');
         $endDate = Carbon::parse($request['date_range'][1])->format('Y-m-d');
         $departureAirport = $request['leaving_from'];
@@ -31,6 +29,6 @@ class FlightController extends Controller
 
         $response = $this->amadeusService->getFlights($startDate, $endDate, $departureAirport, $arrivalAirport, $adults);
 
-        return response()->json($response);
+        return response($response);
     }
 }

@@ -26,7 +26,7 @@ class AmadeusService
 
     public function getFlights($startDate, $endDate, $departureAirport, $arrivalAirport, $adults=1)
     {
-        $data = [
+        $params = [
             'departureDate'           => $startDate,
             'returnDate'              => $endDate,
             'originLocationCode'      => $departureAirport,
@@ -35,20 +35,23 @@ class AmadeusService
             'max'                     => 5,
         ];
 
-        dump($data);
+
+        $accessToken = Cache::remember('amadeus_access_token', 600, function () {
+            return $this->getAccessToken();
+        });
 
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $this->getAccessToken(),
+                'Authorization' => 'Bearer ' . $accessToken,
                 'Accept'        => 'application/json',
-            ])->get($this->flightOffersEndpoint, $data)->json();
+            ])->get($this->flightOffersEndpoint, $params)->json();
         } catch (Exception $e) {
             throw new \Exception('Failed to get flights' . $e->getMessage());
         }
 
-        dump($response);
+        \Log::debug("Amadeus response: " . json_encode($response));
 
-        return "Flights found!";
+        return json_encode($response);
     }
 
     private function getAccessToken(): string

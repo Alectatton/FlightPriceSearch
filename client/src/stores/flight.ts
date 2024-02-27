@@ -16,7 +16,6 @@ export const useFlightStore = defineStore('flight', {
 
             api.getFlights({ params: payload })
                 .then((response: any) => {
-                    console.log("Response", response.data);
                     this.flights = response.data;
                 })
                 .catch((error: any) => {
