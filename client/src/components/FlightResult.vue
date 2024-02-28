@@ -1,6 +1,6 @@
 <template>
     <div>
-        Flight {{  flight.id }}: for {{ flight.price.total }}
+        Flight {{ flight.id }}: for {{ flight.price.total }}
     </div>
 </template>
 
