@@ -48,7 +48,7 @@ class AmadeusService
             throw new \Exception('Failed to get flights' . $e->getMessage());
         }
 
-        $formattedResponse = $this->formatResponse($response);
+        $formattedResponse = json_encode($this->formatResponse($response));
 
         // \Log::info($formattedResponse);
 

@@ -12,7 +12,9 @@ export const useFlightStore = defineStore('flight', {
 
             api.getFlights({ params: payload })
                 .then((response: any) => {
-                    this.flights = response.data.data;
+                    console.log(response.data);
+
+                    this.flights = response.data;
                 })
                 .catch((error: any) => {
                     console.error(error);
