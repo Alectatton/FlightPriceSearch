@@ -35,7 +35,6 @@ class AmadeusService
             'max'                     => 5,
         ];
 
-
         $accessToken = Cache::remember('amadeus_access_token', 600, function () {
             return $this->getAccessToken();
         });
@@ -49,14 +48,33 @@ class AmadeusService
             throw new \Exception('Failed to get flights' . $e->getMessage());
         }
 
-        \Log::debug("Amadeus response: " . json_encode($response));
+        $formattedResponse = $this->formatResponse($response);
 
-        return json_encode($response);
+        // \Log::info($formattedResponse);
+
+        return $formattedResponse;
+    }
+
+    private function formatResponse($response): Collection
+    {
+        return collect($response['data'])->map(function ($flight) {
+            // \Log::info($flight);
+            return [
+                'id'            => $flight['id'],
+                'priceTotal'    => $flight['price']['total'],
+                'pricePerAdult' => $flight['travelerPricings'][0]['price']['total'],
+                'AirlineCodes'  => $flight['validatingAirlineCodes'],
+                'departure'     => $flight['itineraries'][0]['segments'][0]['departure']['iataCode'],
+                'arrival'       => $flight['itineraries'][0]['segments'][0]['arrival']['iataCode'],
+                'departureTime' => $flight['itineraries'][0]['segments'][0]['departure']['at'],
+                'arrivalTime'   => $flight['itineraries'][0]['segments'][0]['arrival']['at'],
+                'duration'      => $flight['itineraries'][0]['duration'],
+            ];
+        });
     }
 
     private function getAccessToken(): string
     {
-        // TODO: Cache the access token
         $client = new Client();
 
         try {
