@@ -63,7 +63,10 @@
             <button 
                 type="submit"
                 @click.prevent="onSubmit"
-                class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                :disabled="flightStore.loading"
+                :class="{ 
+                    'bg-blue-400 hover:bg-blue-600': !flightStore.loading, 'bg-gray-400': flightStore.loading }"
+                class="text-white font-bold py-2 px-4 rounded-lg transition duration-300">
                 Search
             </button>
         </div>
@@ -74,7 +77,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useVuelidate } from '@vuelidate/core';
 import { required, integer, minValue } from '@vuelidate/validators';
-import { mapActions } from 'pinia';
+import { mapActions, mapStores } from 'pinia';
 import { useFlightStore } from '../stores/flight';
 
 export default {
@@ -106,7 +109,7 @@ export default {
         }
     },
     computed: {
-
+        ...mapStores(useFlightStore)
     },
     data () {
         return {

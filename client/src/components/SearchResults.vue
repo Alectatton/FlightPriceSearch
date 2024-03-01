@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flex justify-center">
         <div v-if="!flightStore.loading && flightStore.flights.length === 0" 
             class="flex align-center justify-center py-5">
             <img 
@@ -15,14 +15,13 @@
             </div>
         </div>
 
-        <div v-else class="flex justify-center items-center py-4">
-            <div flex-items>
-                <FlightResult 
-                    v-for="flight in flightStore.flights" 
-                    :key="flight.id" 
-                    :flight="flight">
-                </FlightResult>
-            </div>
+        <div v-else class="justify-center items-center py-6 w-1/2">
+            <FlightResult 
+                class=""
+                v-for="flight in flightStore.flights" 
+                :key="flight.id" 
+                :flight="flight">
+            </FlightResult>
         </div>
     </div>
 </template>
